@@ -24,7 +24,7 @@ def newMenuItem(restaurant_id):
         newItem=MenuItem(name=request.form['name'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id)
+        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete')
 def deleteMenuItem(restaurant_id, menu_id):
