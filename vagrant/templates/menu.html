@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+		{{ restaurant.name }}
+	</title>
+    </head>
+    <body>
+        <h1>{{ restaurant.name  }}</h1>
+	{% for item in items %}
+	<h2>
+	    {{ item.name }}
+        </h2>
+	<br/>
+	{{ item.description }}
+	<br/>
+	{{ item.price }}
+	<br/>
+	<a href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">edit</a>
+	<br/>
+	<a href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">delete</a>
+	<br/>
+	{% endfor %}
+    </body>
+</html>

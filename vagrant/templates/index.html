@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+	    Our Restaurants in Overview
+	</title>
+    </head>
+    <body>
+        {% for restaurant in restaurants %}
+	<h2>
+	    <a href="{{ url_for('restaurants/{{ restaurant.id }}/') }}">{{ restaurant.name }}</a>
+	</h2>
+	{% endfor %}
+    </body>
+</html>
