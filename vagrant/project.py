@@ -29,15 +29,12 @@ def editMenuItem(restaurant_id, menu_id):
     return "Page to edit a new menu item"
 
 @app.route('/')
-def printRestaurants():
-    output=''
+def Restaurants():
     restaurants=session.query(Restaurant).all()
-    for restaurant in restaurants:
-        output+='<a href="/restaurants/%s/">' % restaurant.id
-        output+=restaurant.name
-        output+="</a>"
-        output+="<br/>"
-    return output
+    return printMain(restaurants)
+
+def printMain(restaurants):
+    return render_template('index.html', restaurants=restaurants)
 
 if __name__ == '__main__':
     app.debug = True
