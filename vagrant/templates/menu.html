@@ -21,5 +21,8 @@
 	<a href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">delete</a>
 	<br/>
 	{% endfor %}
+	<br/>
+	<br/>
+	<a href="{{ url_for('newMenuItem', restaurant_id=restaurant.id ) }}">Not the desired menu? Add one here</a>
     </body>
 </html>
