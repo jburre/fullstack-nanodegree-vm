@@ -26,11 +26,19 @@ def newMenuItem(restaurant_id):
         session.commit()
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
-@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete')
+@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete', methods=['GET','POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-    return "Page to delete MenuItems"
+    toDelete=session.query(MenuItem).filter_by(id=menu_id).one()
+    print toDelete.name
+    if request.method=="GET":
+        return render_template('deletemenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=toDelete)
+    else:
+        session.delete(menu_item)
+        session.commit()
+        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
-@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit')
+
+@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
     menu_Item=session.query(MenuItem).filter_by(id=menu_id).one()
     if request.method=='GET':
@@ -40,7 +48,7 @@ def editMenuItem(restaurant_id, menu_id):
             menu_Item.name=request.form['newName']
         session.add(menu_Item)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id)
+        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
 @app.route('/')
 def Restaurants():
