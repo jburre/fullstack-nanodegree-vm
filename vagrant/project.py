@@ -33,10 +33,9 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method=="GET":
         return render_template('deletemenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=toDelete)
     else:
-        session.delete(menu_item)
+        session.delete(toDelete)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
-
+        return render_template('deleteConfirmation.html', item=toDelete, restaurant_id=restaurant_id)
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
