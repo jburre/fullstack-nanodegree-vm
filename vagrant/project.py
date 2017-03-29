@@ -21,9 +21,12 @@ def newMenuItem(restaurant_id):
     if request.method == 'GET':
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
     else:
-        newItem=MenuItem(name=request.form['name'], restaurant_id=restaurant_id)
-        session.add(newItem)
-        session.commit()
+        if request.form['name'] and request.form['price'] and request.form['description']:
+            newItem=MenuItem(name=request.form['name'], restaurant_id=restaurant_id)
+            newItem.price=request.form['price']
+            newItem.description=request.form['description']
+            session.add(newItem)
+            session.commit()
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete', methods=['GET','POST'])
