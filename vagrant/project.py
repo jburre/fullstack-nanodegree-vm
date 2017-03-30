@@ -39,6 +39,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     else:
         session.delete(toDelete)
         session.commit()
+        flash("an item was deleted")
         return render_template('deleteConfirmation.html', item=toDelete, restaurant_id=restaurant_id)
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit', methods=['GET', 'POST'])
@@ -51,6 +52,7 @@ def editMenuItem(restaurant_id, menu_id):
             menu_Item.name=request.form['newName']
         session.add(menu_Item)
         session.commit()
+        flash("an item was edited sucessfully")
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
 @app.route('/')
