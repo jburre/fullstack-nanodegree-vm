@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 app = Flask(__name__)
 
 from sqlalchemy import create_engine
@@ -27,6 +27,7 @@ def newMenuItem(restaurant_id):
             newItem.description=request.form['description']
             session.add(newItem)
             session.commit()
+            flash("new menu item created!")
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete', methods=['GET','POST'])
@@ -61,6 +62,7 @@ def printMain(restaurants):
     return render_template('index.html', restaurants=restaurants)
 
 if __name__ == '__main__':
+    app.secret_key='super_secret_key' #yeah, thanks that our app is not live
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)
     
