@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
         <title>
 		{{ restaurant.name }}
 	</title>
     </head>
     <body>
-        <h1>{{ restaurant.name  }}</h1>
-        {% with messages = get_flashed_messages() %}
-	{% if messages %}
-	<ul>
-	    {% for message in messages %}
-	    <li><strong> {{ message }} </strong></li>
-	    {% endfor %}
-	</ul>
-	{% endif %}
-	{% endwith %}
-	{% for item in items %}
-	<h2>
-	    {{ item.name }}
-        </h2>
-	<br/>
-	{{ item.description }}
-	<br/>
-	{{ item.price }}
-	<br/>
-	<a href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">edit</a>
-	<br/>
-	<a href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">delete</a>
-	<br/>
-	{% endfor %}
-	<br/>
-	<br/>
-	<a href="{{ url_for('newMenuItem', restaurant_id=restaurant.id ) }}">Not the desired menu? Add one here</a>
+		<div class="pane">
+			<div class="header">
+				<h1>{{ restaurant.name  }}</h1>
+			</div>
+			<a href = "{{url_for('newMenuItem', restaurant_id = restaurant.id) }}">Create New Item</a>
+			<div class="flash">
+            {% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+				<li><strong> {{ message }} </strong></li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+		</div>
+			{% for item in items %}
+			<div class="nameAndPrice">
+				<span class="name">
+					<p>
+						{{ item.name }}
+					</p>
+				</span>
+				<span class="price">
+					<p>
+						{{ item.price }}
+					</p>
+				</span>
+			</div>
+			<div class="description">
+				<p>
+					{{ item.description }}
+				</p>
+			</div>
+			<div class ="editdeletepane">
+				<a href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">edit</a>
+				<a href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id) }}">delete</a>
+		{% endfor %}
+			</div>
+		</div>
     </body>
 </html>
