@@ -29,6 +29,10 @@ color:#FFFFCC;
 font-size:0.75em;
 }
 
+a:hover{
+	text-decoration:underline;
+}
+
 .pane{
 position:absolute;
 left:25%;
@@ -66,5 +70,10 @@ float:right;
 }
 .flash{
 background:#CEE5F5;
+}
+
+.pane form {
+	margin-left:5px;
+	margin-bottom:10px;
 }
 
