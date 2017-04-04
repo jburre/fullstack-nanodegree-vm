@@ -22,7 +22,8 @@ session=DBSession()
 def showLogin():
     state=''.join(random.choice(string.ascii_letters+string.digits) for x in xrange(32))
     login_session['state']=state
-    return "The current session state is %s" %login_session['state']
+    #return "The current session state is %s" %login_session['state']
+    return render_template('login.html')
 
 #making an API endpoint (just GET for now)
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
