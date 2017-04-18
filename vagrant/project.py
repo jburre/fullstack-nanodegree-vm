@@ -8,7 +8,18 @@ from database_setup import Restaurant, MenuItem, Base
 # new steps for Auth
 # since session is already used, use new name
 from flask import session as login_session
-import random, string 
+import random, string
+
+#imports for oauthclients
+
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+import httplib2
+import json
+from flask import make_response
+import requests
+
+# current end of imports
 
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind=engine
@@ -23,7 +34,7 @@ def showLogin():
     state=''.join(random.choice(string.ascii_letters+string.digits) for x in xrange(32))
     login_session['state']=state
     #return "The current session state is %s" %login_session['state']
-    return render_template('login.html')
+    return render_template('login.html', STATE=state)
 
 #making an API endpoint (just GET for now)
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
